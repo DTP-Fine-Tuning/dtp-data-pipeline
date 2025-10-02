@@ -35,6 +35,36 @@ dtp-data-pipeline/
 ├── git-set-me.sh         # Script untuk set identitas Git per user
 └── README.md             # Dokumentasi utama repo ini
 ```
+---
+
+## Struktur Direktori Tree Visualize
+
+```mermaid
+graph TD
+    A[llm-data-pipeline]
+    A --> B[configs]
+    A --> C[data_raw]
+    A --> D[data_processed]
+    A --> E[exports]
+    A --> F[notebooks]
+    A --> G[scripts]
+    A --> H[tests]
+    A --> I[docs]
+    A --> J[.gitignore]
+    A --> K[README.md]
+    A --> L[requirements.txt]
+
+    B:::folder
+    C:::folder
+    D:::folder
+    E:::folder
+    F:::folder
+    G:::folder
+    H:::folder
+    I:::folder
+
+    classDef folder fill:#f9f,stroke:#333,stroke-width:2px;
+```
 
 ---
 
