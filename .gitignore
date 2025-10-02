@@ -1,0 +1,42 @@
+# Virtual environment
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs & temp
+*.log
+*.tmp
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Output artifacts
+outputs/
+reports/
+*.csv
+*.tsv
+*.jsonl
+*.parquet
+
+# Model artifacts (jika ada)
+*.bin
+*.pt
+*.pkl
+
+# System files (MacOS)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# System files (Windows)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE/editor configs
+.vscode/
+.idea/
