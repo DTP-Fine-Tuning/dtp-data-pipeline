@@ -141,10 +141,10 @@ def impute_with_gemini_final(row, column_to_impute):
     
     # buat prompt
     prompts = {
-        'Industri': f"Berdasarkan pekerjaan '{pekerjaan}' dan deskripsi '{deskripsi}', apa nama industri yang paling sesuai? Berikan satu jawaban singkat saja. Contoh: Teknologi Informasi.",
-        'Spesial Info': f"Dari deskripsi pekerjaan '{deskripsi}' untuk posisi '{pekerjaan}', identifikasi 1-2 kualifikasi khusus yang paling menonjol. Jika tidak ada, tulis 'Tidak ada'. Berikan jawaban singkat.",
-        'Skillset': f"Berdasarkan deskripsi '{deskripsi}' untuk posisi '{pekerjaan}', sebutkan 5 skill utama yang dibutuhkan, pisahkan dengan titik koma.",
-        'Tools': f"Berdasarkan deskripsi '{deskripsi}' untuk posisi '{pekerjaan}', sebutkan 3 tools/software utama yang digunakan, pisahkan dengan titik koma."
+        'Industri': f"Berdasarkan pekerjaan '{pekerjaan}' dan deskripsi '{deskripsi}', apa nama industri yang paling sesuai? Berikan satu jawaban singkat saja. Contoh: Computer Software & Networking. Contoh output lain: Konsultasi & Layanan Manajemen",
+        'Spesial Info': f"Dari deskripsi pekerjaan '{deskripsi}' untuk posisi '{pekerjaan}', identifikasi special info yang memudahkan dalam mencari pekerjaan sesuai pada bidangnya, Contoh Output: Project Management and Information Technology, atau Contoh Output lain: Web Programmer. Jika tidak ada, tulis 'Tidak ada'. Tolong untuk outputnya berikan jawaban singkat saja.",
+        'Skillset': f"Berdasarkan deskripsi '{deskripsi}' untuk posisi '{pekerjaan}', sebutkan 5 skill utama yang dibutuhkan, pisahkan dengan titik koma. Contoh output: Web Development, Data Understanding, Tensorflow, PyTorch",
+        'Tools': f"Berdasarkan deskripsi '{deskripsi}' untuk posisi '{pekerjaan}', sebutkan 3 tools/software utama yang digunakan, pisahkan dengan titik koma. Contoh output: Excel, Python, Power BI, MySQL"
     }
     
     prompt = prompts.get(column_to_impute)
@@ -153,7 +153,6 @@ def impute_with_gemini_final(row, column_to_impute):
 
     try:
         response = model.generate_content(prompt)
-        
         
         time.sleep(4) 
         
@@ -170,21 +169,23 @@ columns_to_impute_gemini = ['Industri', 'Spesial Info', 'Skillset', 'Tools']
 
 
 for col in columns_to_impute_gemini:
+    mask_missing = df_lowongan[col].isnull()
+    
     if df_lowongan[col].isnull().any():
-        print(f"\n🐢 Memulai imputasi penuh untuk kolom: {col}...")
-        
-        df_lowongan[col] = df_lowongan.apply(
-            lambda row: impute_with_gemini_final(row, col) if pd.isna(row[col]) else row[col],
+        print(f"\nMemulai imputasi untuk {mask_missing.sum()} baris di kolom: {col}...")
+
+        df_lowongan.loc[mask_missing, col] = df_lowongan[mask_missing].apply(
+            lambda row: impute_with_gemini_final(row, col),
             axis=1
         )
         
-        nama_file_sementara = f'Data_Cleaned_Sementara_Setelah_{col}.csv'
+        nama_file_sementara = f'/home/wildanaziz/dtp-data-pipeline/data_processed/6001-9000/Temporary/Data_Cleaned_Sementara_Setelah_{col}.csv'
         df_lowongan.to_csv(nama_file_sementara, index=False)
-        print(f"✅ Progres disimpan di '{nama_file_sementara}'")
+        print(f"Progres disimpan di '{nama_file_sementara}'")
     else:
-        print(f"\n⏭️ Melewati kolom '{col}' karena sudah terisi semua.")
+        print(f"\nMelewati kolom '{col}' karena sudah terisi semua.")
 
 print("\n[FINAL] Menyimpan hasil akhir ke file CSV...")
-df_lowongan.to_csv('Data_Lowongan_Pekerjaan_Cleaned_Final.csv', index=False)
-print("✅ Proses selesai dan file final berhasil disimpan!")
+df_lowongan.to_csv('/home/wildanaziz/dtp-data-pipeline/data_processed/6001-9000/Data_Lowongan_Pekerjaan_Cleaned_6001-9000_Final.csv', index=False)
+print("Proses selesai dan file final berhasil disimpan!")
 
