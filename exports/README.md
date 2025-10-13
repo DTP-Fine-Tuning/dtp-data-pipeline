@@ -50,4 +50,4 @@ exports/
 ## Catatan:
 - Implementasi export scripts akan ditambahkan setelah cleaning pipeline stabil
 - Fokus pada format yang kompatibel dengan framework ML populer
-- Pertimbangkan kompresі untuk dataset besar
+- Pertimbangkan kompresi untuk dataset besar
