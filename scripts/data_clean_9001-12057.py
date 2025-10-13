@@ -10,7 +10,7 @@ env_file_name = "../gemini.env"
 
 #fetch api gemini
 if load_dotenv(dotenv_path=env_file_name):
-    print(f"File{env_file_name} berhasil dimuat..")
+    print(f"File {env_file_name} berhasil dimuat..")
 else:
     print(f"File {env_file_name} tidak berhasil dimuat..")
 
