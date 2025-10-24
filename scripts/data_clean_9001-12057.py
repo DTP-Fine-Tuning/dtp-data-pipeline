@@ -64,7 +64,7 @@ def impute_level_pekerjaan(row):
 
 df_lowongan['Level Pekerjaan'] = df_lowongan.apply(impute_level_pekerjaan, axis=1)
 
-print("\\Normalisasi Level Pekerjaan selesai")
+print("\nNormalisasi Level Pekerjaan selesai")
 
 #pemetaan
 def kategorisasi_level(level):
