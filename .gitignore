@@ -3,18 +3,26 @@
 env/
 .env
 gemini.env
+venv/
+
+# Conda environment
+diploy_flagging/
 
 # Python cache
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
+.Python
 
 # Logs & temp
 *.log
 *.tmp
+*.temp
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
+*.ipynb_checkpoints
 
 # Output artifacts
 outputs/
@@ -23,21 +31,74 @@ reports/
 *.jsonl
 *.parquet
 
-# Model artifacts (jika ada)
+# Data files (Excel, CSV)
+*.xlsx
+*.xls
+*.csv
+!requirements*.txt
+
+# Exclude specific folders with data
+Data Diploy Not Flagged/*.xlsx
+Data Diploy Flagged/*.xlsx
+Dataset Diploy Validated Full/*.xlsx
+
+# Model artifacts
 *.bin
 *.pt
 *.pkl
+*.h5
+*.onnx
+model_cache/
+.cache/
+
+# Vector database cache
+qdrant_storage/
+.qdrant/
+
+# API Keys & Secrets
+*.key
+*.pem
+secrets.yaml
+.secrets/
+api_keys.txt
 
 # System files (MacOS)
 .DS_Store
 .AppleDouble
 .LSOverride
+._*
 
 # System files (Windows)
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+$RECYCLE.BIN/
+
+# System files (Linux)
+*~
 
 # IDE/editor configs
 .vscode/
 .idea/
+*.swp
+*.swo
+*.code-workspace
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Pytest
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+
+# Ruff
+.ruff_cache/
