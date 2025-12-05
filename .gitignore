@@ -31,10 +31,6 @@ reports/
 *.jsonl
 *.parquet
 
-# Data files (Excel, CSV)
-*.xlsx
-*.xls
-*.csv
 !requirements*.txt
 
 # Exclude specific folders with data
